@@ -1,0 +1,15 @@
+
+<div class="cards-container">
+  <div *ngFor="let product of products; let i = index">
+    <!-- adicionar el evento que envia el objeto del producto elegido-->
+    <app-card-product
+      [product]="product"
+      (addToCart)="addToCart($event)"
+    ></app-card-product>
+
+  </div>
+</div>
+<!--lo que se hace en este codigo es definir un div que contendra todas las tarjetas las cuales generaremos usando el ngFor 
+luego definimos el div con el ngfor en el que iteraremos nuestro arreglo de products definiendo cada elemento por individual 
+como item y por cada iteracion reutilizaremos nuestro componente app-card-product que ya teniamos previamente el cual esta vez
+sera llenado con la informacion de cada item del arreglo products-->>
