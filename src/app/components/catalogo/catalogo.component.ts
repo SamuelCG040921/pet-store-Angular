@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
-import {CartServicesService} from './../../services/cart-services.service';
+import { Component, OnInit } from '@angular/core';
+import { CartServicesService } from './../../services/cart-services.service';
+import { ApiService } from '../../services/api.service'; 
 
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
-  styleUrl: './catalogo.component.scss'
+  styleUrls: ['./catalogo.component.scss'] 
 })
 
+export class CatalogoComponent implements OnInit {
+  public productos: any = []
 
-export class CatalogoComponent {
-	// inyectar la dependencia del servicio en el constructor.
-  constructor(private cartServicesService: CartServicesService){
+  // Necesitas inyectar ApiService en el constructor
+  constructor(private cartServicesService: CartServicesService, private apiService: ApiService) { }
+
+  ngOnInit(): void {
+    this.apiService.getProducts()
+    .subscribe((res ) => {
+    this.productos = res;
+  });
   }
   
   // actualizar el método para añadir un producto al carrito mediante el servicio

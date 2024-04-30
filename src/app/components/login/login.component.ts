@@ -1,40 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import {ReactiveFormsModule, FormBuilder, FormGroup, Validators, EmailValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss'] // Usa styleUrls en lugar de styleUrl
 })
-export class LoginComponent implements OnInit{
-   loginForm: FormGroup;
-   authenticationError: boolean = false;
+export class LoginComponent implements OnInit {
+  authenticationError: boolean = false;
+  myForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,  private router: Router) {
-   
-    this.loginForm = this.formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private router: Router) {
+    this.myForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-      
+      password: ['', Validators.required]      
     });
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+    // No es necesario volver a definir el formulario aquí
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-        // Lógica para autenticar al usuario
-        console.log(this.loginForm.value);
-      } else {
-        // Manejar errores de validación
-      }
+    if (this.myForm.valid) {
+      // Lógica para autenticar al usuario
+      console.log(this.myForm.value); // Cambiado a this.myForm.value
+    } else {
+      // Manejar errores de validación
     }
-
+  }
 }
-
